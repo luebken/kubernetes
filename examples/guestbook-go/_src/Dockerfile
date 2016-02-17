@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# A Golang image (kubernetes/guestbook-builder) to build the guestbook image.
+
 FROM google/golang:latest
 
-ADD . /gopath/src/github.com/GoogleCloudPlatform/kubernetes/examples/guestbook-go/_src
+ADD . /go/src/github.com/GoogleCloudPlatform/kubernetes/examples/guestbook-go/_src
 
-WORKDIR /gopath/src/github.com/GoogleCloudPlatform/kubernetes/examples/guestbook-go/
+WORKDIR /go/src/github.com/GoogleCloudPlatform/kubernetes/examples/guestbook-go/
 RUN cd _src/ && go get && go build -o ../bin/guestbook
 RUN cp _src/guestbook/Dockerfile .
 
