@@ -27,13 +27,6 @@ For a detailed description of the Guestbook example the [README.md](README.md) a
 	replicationcontroller "redis-slave" created
     # kubectl create -f redis-slave-service.yml
 	service "redis-slave" created
-	# verify with
-	$ kubectl get svc
-	...
-	$ kubectl get rc
-	...
-	$ kubectl get pods
-	...
 
 ## Build the guestbook image
 
