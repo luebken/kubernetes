@@ -13,18 +13,15 @@ For a detailed description of the Guestbook example the [README.md](README.md) a
 
 ## Create the Redis master
 
-    ```console
     # create the replication controller
     $ kubectl create -f redis-master-controller.yml
     replicationcontrollers/redis-master
     # create the service
     $ kubectl create -f redis-master-service.yml
 	service "redis-master" created
-    ```
 
 ## Create the Redis slave
 
-    ```console
     # create the replication controller
     $ kubectl create -f redis-slave-controller.yml
 	replicationcontroller "redis-slave" created
@@ -37,33 +34,27 @@ For a detailed description of the Guestbook example the [README.md](README.md) a
 	...
 	$ kubectl get pods
 	...
-    ```
 
 ## Build the guestbook image
 
-	```console
 	# change something in the guestbook image e.g. background color in css
 	# 
 	# build and push the guestbook image. replace `luebken` with your docker username
 	cd _src
 	./script/release.sh latest luebken
 	cd ..
-    ```
 
 ## Create guestbook controller
 	
-	```console
 	# replace {{ USERNAME }} in `guestbook-controller.yml.tpl` and save to `guestbook-controller.yml`
 	# e.g. with github.com/andreasjansson/envtpl
 	USERNAME=luebken envtpl < guestbook-controller.yml.tpl > guestbook-controller.yml
 	$ kubectl create -f guestbook-controller.yml
 	replicationcontroller "guestbook" created
-	```
 
 
 ## Create the guestbook service for Vagrant
 	
-	```console
 	# replace {{ SERVICE_TYPE }} in `guestbook-service.yml.tpl` and save to guestbook-service.yml
 	# e.g. with github.com/andreasjansson/envtpl
 	SERVICE_TYPE=NodePort envtpl < guestbook-service.yml.tpl > guestbook-service.yml
@@ -74,22 +65,18 @@ For a detailed description of the Guestbook example the [README.md](README.md) a
 
 	See http://releases.k8s.io/release-1.1/docs/user-guide/services-firewalls.md for more details.
 	service "guestbook" created
-	```
 
 ## Expose the guestbook out of Vagrant
 		
-	```console
 	# get the minion virtualbox name
 	$ VBoxManage list vms
 	"kubernetes-117_master_1455702219437_34697" {6003e484-4333-42de-aa24-359cbf1d67e6}
 	"kubernetes-117_minion-1_1455702358000_49974" {779dc587-c927-4d7c-8330-edfccb2e968f}
 	# expose the port from the service above
 	VBoxManage controlvm kubernetes-117_minion-1_1455702358000_49974 natpf1 rule1,tcp,,30423,,30423
-	```
 
 ## Verify
 
-	```
 	# open app in browser
 	$ open http://localhost:30423
 	# debug / verify
@@ -100,4 +87,3 @@ For a detailed description of the Guestbook example the [README.md](README.md) a
 	$ kubectl get pods
 	...
     $ kubectl describe pods guestbook
-    ```
