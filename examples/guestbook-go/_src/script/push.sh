@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Usage: ./script/push.sh [TAG]
+# Usage: ./script/push.sh [TAG] [USERNAME]
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
 guestbook_version=${1:-latest}
-docker push "kubernetes/guestbook:${guestbook_version}"
+username=${2:-kubernetes}
+docker push "${username}/guestbook:${guestbook_version}"
