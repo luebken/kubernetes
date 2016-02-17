@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: guestbook
-          image: kubernetes/guestbook:v2
+          image: kubernetes/guestbook:latest
           ports:
             - name: http-server
               containerPort: 3000
