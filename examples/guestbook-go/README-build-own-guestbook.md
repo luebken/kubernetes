@@ -1,13 +1,15 @@
 # Custom Guestbook example 
 
-This Guestbook example shows how to build you own Docker image and deploy it into Kubernetes.
+This example shows how to build you own Guestbook image and deploy it into Kubernetes.
 
 For a detailed description of the Guestbook example the [README.md](README.md) and [_src/README.md](_src/README.md)
+
+> Note: Currently this is a rough TLDR version with just the commands. If there is interest a detailed version might be added later. Please comment here: https://github.com/luebken/kubernetes/pull/1
 
 ## Prerequisites
 
 * Have a Kubernetes cluster running. e.g. with Vagrant
-* Have Docker running and an account
+* Have Docker running and an Docker Hub account
 * For ease of use have github.com/andreasjansson/envtpl installed
 
 
@@ -30,8 +32,9 @@ For a detailed description of the Guestbook example the [README.md](README.md) a
 
 ## Build the guestbook image
 
-	# change something in the guestbook image e.g. background color in css
-	# 
+	cd _src
+	# change something in the guestbook image e.g. change the <title> in the index.html
+	sed -i '' 's/Guestbook/My-Oh-My-Guestbook/' public/index.html
 	# build and push the guestbook image. replace `luebken` with your docker username
 	cd _src
 	./script/release.sh latest luebken
