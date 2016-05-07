@@ -34,14 +34,17 @@ Documentation for other releases can be found at
 
 ## Building and releasing Guestbook Image
 
-This process employs building two docker images, one compiles the source and the other hosts the compiled binaries.
+This process employs building two docker images:
 
-Releasing the image requires that you have access to the docker registry user account which will host the image.
+  * `kubernetes/guestbook-builder`: compiles the source and
+  *  `kubernetes/guestbook`: hosts the compiled binaries.
 
-To build and release the guestbook image:
+Releasing the image requires that you have access to the docker registry user account which will host the image. You can specify the tag and the username when building and releasing. It defaults to tag `latest` and the user `kubernetes`.
+
+To build and release the guestbook image for the tag `latest` and the user `myuser`:
 
     cd examples/guestbook-go/_src
-    ./script/release.sh
+    ./script/release.sh latest myuser
 
 #### Step by step
 
@@ -49,23 +52,23 @@ If you may want to, you can build and push the image step by step.
 
 ###### Start fresh before building
 
-    ./script/clean.sh 2> /dev/null
+    ./script/clean.sh latest myuser 2> /dev/null
 
 ###### Build
 
 Builds a docker image that builds the app and packages it into a minimal docker image
 
-    ./script/build.sh
+    ./script/build.sh latest myuser
 
 ###### Push
 
-Accepts an optional tag (defaults to "latest")
+Pushes the image to the registry:
 
-    ./script/push.sh [TAG]
+    ./script/push.sh latest myuser
 
 ###### Clean up
 
-    ./script/clean.sh
+    ./script/clean.sh latest myuser
 
 
 <!-- BEGIN MUNGE: GENERATED_ANALYTICS -->

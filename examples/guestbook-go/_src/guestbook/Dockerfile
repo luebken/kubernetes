@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# The guestbook image (kubernetes/guestbook)
+
 FROM busybox:ubuntu-14.04
 
 ADD ./bin/guestbook /app/guestbook

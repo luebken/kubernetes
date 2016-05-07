@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Usage: ./script/release.sh [TAG]
+# Usage: ./script/release.sh [TAG] [USERNAME]
 
 set -o errexit
 set -o nounset
@@ -24,17 +24,18 @@ base_dir=$(dirname "$0")
 base_dir=$(cd "${base_dir}" && pwd)
 
 guestbook_version=${1:-latest}
+username=${2:-kubernetes}
 
 echo " ---> Cleaning up before building..."
-"${base_dir}/clean.sh" "${guestbook_version}" 2> /dev/null
+"${base_dir}/clean.sh" "${guestbook_version}" "${username}" 2> /dev/null
 
 echo " ---> Building..."
-"${base_dir}/build.sh" "${guestbook_version}"
+"${base_dir}/build.sh" "${guestbook_version}" "${username}"
 
-echo " ---> Pushing kubernetes/guestbook:${guestbook_version}..."
-"${base_dir}/push.sh" "${guestbook_version}"
+echo " ---> Pushing ${username}/guestbook:${guestbook_version}..."
+"${base_dir}/push.sh" "${guestbook_version}" "${username}"
 
 echo " ---> Cleaning up..."
-"${base_dir}/clean.sh" "${guestbook_version}"
+"${base_dir}/clean.sh" "${guestbook_version}" "${username}"
 
 echo " ---> Done."

@@ -14,13 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Usage: ./script/clean.sh
+# Usage: ./script/clean.sh [TAG] [USERNAME]
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
 guestbook_version=${1:-latest}
+username=${2:-kubernetes}
 docker rm -f guestbook-builder 2> /dev/null || true
 docker rmi -f kubernetes/guestbook-builder || true
-docker rmi -f "kubernetes/guestbook:${guestbook_version}" || true
+docker rmi -f "${username}/guestbook:${guestbook_version}" || true

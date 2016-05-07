@@ -14,12 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Usage: ./script/build.sh
+# Usage: ./script/build.sh [TAG] [USERNAME]
 
 set -o errexit
 set -o nounset
 set -o pipefail
 
 guestbook_version=${1:-latest}
+username=${2:-kubernetes}
 docker build --rm --force-rm -t kubernetes/guestbook-builder .
-docker run --rm kubernetes/guestbook-builder | docker build -t "kubernetes/guestbook:${guestbook_version}" -
+docker run --rm kubernetes/guestbook-builder | docker build -t "${username}/guestbook:${guestbook_version}" -
